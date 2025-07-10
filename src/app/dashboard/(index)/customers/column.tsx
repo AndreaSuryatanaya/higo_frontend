@@ -44,8 +44,8 @@ export const columns: ColumnDef<TColumn>[] = [
         header: "Location",
     },
     {
-        accessorKey: "locationType",
-        header: "Location Type",
+        accessorKey: "gender",
+        header: "Gender",
     },
     {
         accessorKey: "loginHour",

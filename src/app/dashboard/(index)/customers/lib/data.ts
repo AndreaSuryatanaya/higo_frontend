@@ -1,10 +1,10 @@
 type GetCustomersParams = {
-    // page?: number;
+    page?: number;
     limit?: number;
 };
 
-export async function getCustomers({ limit = 10 }: GetCustomersParams) {
-    const res = await fetch(`http://localhost:3000/customers?limit=${limit}`, {
+export async function getCustomers({ limit = 20, page = 1 }: GetCustomersParams) {
+    const res = await fetch(`http://localhost:3000/customers?limit=${limit}&page=${page}`, {
         next: { revalidate: 60 },
     });
 
