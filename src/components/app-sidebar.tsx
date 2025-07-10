@@ -4,13 +4,14 @@ import * as React from "react";
 import Link from "next/link";
 import {
     IconChartBar,
-    IconDashboard,
+    // IconDashboard,
     IconDatabase,
     IconFileAi,
     // IconFolder,
     IconHelp,
     IconInnerShadowTop,
     // IconListDetails,
+    IconLogout,
     IconReport,
     IconSearch,
     IconSettings,
@@ -18,7 +19,8 @@ import {
 } from "@tabler/icons-react";
 
 import { NavMain } from "@/components/nav-main";
-import { NavUser } from "@/components/nav-user";
+// import { NavUser } from "@/components/nav-user";
+import { Button } from "@/components/ui/button";
 import {
     Sidebar,
     SidebarContent,
@@ -37,11 +39,11 @@ const navigationConfig = {
         avatar: "/avatars/admin.jpg",
     },
     mainNavigation: [
-        {
-            title: "Dashboard",
-            url: "/dashboard",
-            icon: IconDashboard,
-        },
+        // {
+        //     title: "Dashboard",
+        //     url: "/dashboard",
+        //     icon: IconDashboard,
+        // },
         {
             title: "Customers",
             url: "/dashboard/customers",
@@ -108,7 +110,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
-                            <Link href="/dashboard">
+                            <Link href="#">
                                 <IconInnerShadowTop className="!size-5" />
                                 <span className="text-base font-semibold">Dashboard App</span>
                             </Link>
@@ -123,8 +125,25 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 {/* Future: Add documents section */}
                 {/* <NavDocuments items={navigationConfig.documents} /> */}
             </SidebarContent>
+
             <SidebarFooter>
-                <NavUser user={navigationConfig.user} />
+                <SidebarMenu>
+                    <SidebarMenuItem>
+                        <Button
+                            className="w-full mb-5 bg-lime-400 justify-center h-8 px-2 font-normal text-sidebar-foreground text-center hover:bg-lime-500 hover:text-sidebar-accent-foreground"
+                            onClick={() => {
+                                // Clear auth token
+                                document.cookie = "auth-token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+                                // Redirect to sign-in page
+                                window.location.href = "/sign-in";
+                            }}
+                        >
+                            <IconLogout className="!size-4" />
+                            Log out
+                        </Button>
+                    </SidebarMenuItem>
+                </SidebarMenu>
+                {/* <NavUser user={navigationConfig.user} /> */}
             </SidebarFooter>
         </Sidebar>
     );
