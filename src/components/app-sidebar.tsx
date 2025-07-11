@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
     IconChartBar,
     // IconDashboard,
@@ -104,6 +105,22 @@ const navigationConfig = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+    const router = useRouter();
+    const [mounted, setMounted] = React.useState(false);
+
+    React.useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    const handleLogout = () => {
+        if (typeof window !== "undefined") {
+            // Clear auth token
+            document.cookie = "auth-token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+            // Redirect to sign-in page
+            router.push("/sign-in");
+        }
+    };
+
     return (
         <Sidebar collapsible="offcanvas" {...props}>
             <SidebarHeader>
@@ -129,18 +146,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarFooter>
                 <SidebarMenu>
                     <SidebarMenuItem>
-                        <Button
-                            className="w-full mb-5 bg-lime-400 justify-center h-8 px-2 font-normal text-sidebar-foreground text-center hover:bg-lime-500 hover:text-sidebar-accent-foreground"
-                            onClick={() => {
-                                // Clear auth token
-                                document.cookie = "auth-token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-                                // Redirect to sign-in page
-                                window.location.href = "/sign-in";
-                            }}
-                        >
-                            <IconLogout className="!size-4" />
-                            Log out
-                        </Button>
+                        {mounted && (
+                            <Button
+                                className="w-full mb-5 bg-lime-400 justify-center h-8 px-2 font-normal text-center hover:bg-lime-500 text-black"
+                                onClick={handleLogout}
+                            >
+                                <IconLogout className="!size-4" />
+                                Log out
+                            </Button>
+                        )}
                     </SidebarMenuItem>
                 </SidebarMenu>
                 {/* <NavUser user={navigationConfig.user} /> */}

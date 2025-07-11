@@ -22,8 +22,6 @@ export default function SignInPage() {
         setError("");
 
         try {
-            // Simulate API call for authentication
-            // In a real app, you would call your authentication API here
             if (email === "admin@example.com" && password === "qwerty") {
                 // Set authentication cookie/token
                 document.cookie = "auth-token=authenticated; path=/; max-age=86400"; // 24 hours
@@ -41,10 +39,10 @@ export default function SignInPage() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-gray-950 to-gray-920 py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full space-y-8">
                 <div className="text-center">
-                    <h2 className="mt-6 text-3xl font-bold text-gray-900">Sign in to your account</h2>
+                    <h2 className="mt-6 text-3xl font-bold text-white">Sign in to your account</h2>
                     <p className="mt-2 text-sm text-gray-600">Access your dashboard</p>
                 </div>
 

@@ -4,7 +4,7 @@ type GetCustomersParams = {
 };
 
 export async function getCustomers({ limit = 20, page = 1 }: GetCustomersParams) {
-    const res = await fetch(`http://localhost:3000/customers?limit=${limit}&page=${page}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/customers?limit=${limit}&page=${page}`, {
         next: { revalidate: 60 },
     });
 

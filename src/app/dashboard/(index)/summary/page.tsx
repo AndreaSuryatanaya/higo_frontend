@@ -80,7 +80,7 @@ export default function SummaryPage() {
         const fetchSummary = async () => {
             try {
                 setLoading(true);
-                const response = await fetch("http://localhost:3000/customers/statistics/summary");
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/customers/statistics/summary`);
                 const result = await response.json();
                 setData(result);
             } catch (error) {

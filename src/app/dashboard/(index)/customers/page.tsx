@@ -51,7 +51,7 @@ function CustomersContent() {
         const fetchCustomers = async () => {
             try {
                 setLoading(true);
-                const res = await fetch(`http://localhost:3000/customers?page=${page}&limit=${limit}`);
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/customers?page=${page}&limit=${limit}`);
                 const result = await res.json();
                 setData(result.data);
                 setTotalPages(result.totalPages);
@@ -106,8 +106,8 @@ function CustomersContent() {
                         </SelectContent>
                     </Select>
                 </div>
-                <span className="text-sm font-sans text-gray-700">
-                    Page <span className="font-sans">{page}</span> of {totalPages}
+                <span className="text-sm font-sans text-white">
+                    Page <span className="font-sans text-white">{page}</span> of {totalPages}
                 </span>
 
                 <Button
