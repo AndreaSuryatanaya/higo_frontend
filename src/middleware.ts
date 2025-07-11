@@ -14,9 +14,15 @@ export function middleware(request: NextRequest) {
     // Check if the current path is public
     const isPublicPath = publicPaths.includes(pathname);
 
-    // If user is trying to access root path (/), redirect to sign-in
-    if (pathname === "/" && !authToken) {
-        return NextResponse.redirect(new URL("/sign-in", request.url));
+    // If user is trying to access root path (/)
+    if (pathname === "/") {
+        if (!authToken) {
+            // Not authenticated, redirect to sign-in
+            return NextResponse.redirect(new URL("/sign-in", request.url));
+        } else {
+            // Authenticated, redirect to dashboard
+            return NextResponse.redirect(new URL("/dashboard/customers", request.url));
+        }
     }
 
     // If user is not authenticated and trying to access protected route
